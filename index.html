@@ -60,6 +60,10 @@
             font-weight: bold;
             color: black;
         }
+        #youtube-link {
+            display: none;
+            margin-top: 20px;
+        }
         .popup {
             position: fixed;
             top: 50%;
@@ -145,6 +149,10 @@
             <h2>You will receive your gift when this timer ends:</h2>
             <p id="countdown"></p>
         </div>
+        <div id="youtube-link">
+            <h2>Your surprise is here! 🎁</h2>
+            <a href="https://www.youtube.com/watch?v=Hal_s3Gh25I" target="_blank">Click here to watch</a>
+        </div>
     </div>
     <div id="popup" class="popup">
         <h2>THANK YOU FOR MAKING ME THE HAPPIEST MAN IN THE WORLD MY LOVE THANK YOU FOR LETTING ME FALL IN LOVE WITH THOSE BIG BEAUTIFUL EYES THAT ILLUMINATING SMILE AND THAT SWEET HEART</h2>
@@ -177,9 +185,8 @@
             button.style.left = `${x}px`;
             button.style.top = `${y}px`;
         }
-
-        function startCountdown() {
-            let countDownDate = new Date('February 14, 2025 00:00:00 GMT+5:30').getTime();
+            function startCountdown() {
+            let countDownDate = new Date('February 14, 2025 00:00:00 GMT+0530').getTime();
             let x = setInterval(function() {
                 let now = new Date().getTime();
                 let distance = countDownDate - now;
@@ -187,7 +194,12 @@
                 let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                if (distance <= 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown-container").innerHTML = "The wait is over! ❤️";
+                    document.getElementById("youtube-link").style.display = "block";
+                }
             }, 1000);
         }
     </script>
